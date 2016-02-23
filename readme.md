@@ -2,33 +2,50 @@
 
 ## Learning Objectives
 
-- Explain the importance of OOJS in front-end code
+- Explain the importance of OOJS
 - Describe the role of constructor functions, and how they work
-- Use constructor functions and the `new` keyword to create objects with shared properties (like classes)
+- Use constructor functions and the `new` keyword to create objects with shared properties
 - Describe what a prototype object is, and how they are used in JS
 - Differentiate between `__proto__` and Animal.prototype
 - Diagram the relationship between an object, its constructor, and prototype
-- Compare `Object.create` vs constructors
 - Compare / contrast classical and prototypal inheritance
+- Compare `Object.create` vs constructors
 - Use the Chrome element inspector to traverse through the prototypal tree.
 
-## Object Orientation (10 minutes)
+## Framing: Importance of Object Oriented Programming (10 min)
 
 Hi! This is an object: `{}`. Now you're oriented.
 
 ![Bad joke](http://media.giphy.com/media/xn2BRZmrIJxmM/giphy.gif)
 
-Objects in JavaScript are a bit different from the ones you are used to from
-ruby, but many of the same object-oriented design principles you applied when
-writing your rails apps can apply when writing front-end JavaScript.
+We have exposure to objects in JavaScript, using object literal notation. Some of you might have used something like this in your first project:
 
-What is the definition of an object? An object encapsulates related data and
-behavior. Why might we want to do this? Object-oriented programming provides us
-with opportunities to clean up our procedural code and model it more-closely to
-the external world.
+```js
+var game = {
+  cards: document.querySelectorAll(".cards"),
+  startingTime: 0,
+  createBoard: function(){
+    var gameBoard = document.querySelector("#game-board")
+    gameBoard.style.display = "inline";
+  }
+};
+```
+* What is an object in programming?
 
-This becomes **very** important as our front-end code grows in complexity. Even
-a simple app will have lots of code on the front end to do
+>An object encapsulates related data and
+behavior.
+>Objects help to create an organized structure to encapsulate this information
+
+* Why might we use an OOP approach to programming?
+
+>In summary, Object-oriented programming provides us
+with opportunities to clean up our procedural code and model it more-closely to the external world.
+>OOP helps us to achieve the following:
+1. Encapsulation
+2. Abstraction
+3. Modularity
+
+OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front end to do
 things like:
 
 * render data from the back end
@@ -36,59 +53,7 @@ things like:
 * respond to events like clicking buttons / links
 * send requests to the back end to fetch / update / destroy data
 
-Suppose we were building a card game (this example doesn't matter front-end vs back-end). We'd start by building a deck. What does
-the deck of cards look like? Perhaps:
-
-```js
-var deck = ["Ace of Spades", "2 of Diamonds", "Queen of Diamonds", ... ] // etc
-```
-
-To a reader, it's immediately obvious that we have a deck of cards. But, when we go to use our data structure, say in a game of high card, we notice a few problems.
-
-```js
-// does the Ace of Spades beat the 2 of Diamonds? How do we compare strings?
-var card0 = deck[0]; //=> "Ace of Spades"
-var card1 = deck[1]; //=> "2 of Diamonds"
-if ( translate(card0) > translate(card1) ) {
-  return "Player 1 wins!";
-} else {
-  return "Player 2 wins!";
-}
-```
-
-We've had to write a whole other global method just translate card faces into
-numerical values for comparison. You can see how this code is *procedural*: we
-do things step by step, manually creating values as we go in order to accomplish
-our work. Instead, we might have taken an object-oriented approach:
-
-```js
-var deck = [
-  {
-    face: "Ace of Spades",
-    numValue: 14,
-    suit: "Spades",
-    value: "Ace",
-    beat: function beat (otherCard) {
-      this.numValue > otherCard.numValue ? true : false
-    }
-  },
-  { ... }, ...] // etc
-```
-
-There is still a lot of repetition in our object code. We'll see how to take
-care of this in a moment. But, for now, notice how our comparison code is much
-simpler:
-
-```js
-deck[0].beat(deck[1]) ? "Player 1 wins!" : "Player 2 wins!"
-```
-
-The reason this is simpler is easy: we've encapsulated the comparison logic in
-the card object itself, as well as each card's numerical value. Additionally,
-each card has a well-defined interface (the data and methods that can be
-accessed / called)
-
-## Making Objects (10 minutes - 10/150)
+### Creating Objects (10 min)
 
 So far, we've had to make our objects 'by hand', i.e. using object literals:
 
@@ -119,9 +84,7 @@ var civic = {
   }
 }
 ```
-
-Notice how much duplication there is in that code! Just imagine if we needed a
-hundred cars in our app!!
+Although we are taking an object-oriented approach to programming, notice how much duplication there is in that code! Just imagine if we needed a hundred cars in our app!! Our code would certainly not be considered "DRY".
 
 As you may have noticed, some of these properties change between cars (model
 and color), and others stay the same, for example, `fuel` starts at 100, and
@@ -129,44 +92,57 @@ and color), and others stay the same, for example, `fuel` starts at 100, and
 
 Why don't we build a function that makes these objects for us!
 
-### Exercise (10 minutes - 20/150)
+### You-Do Exercise: Create a makeCar function (10 min)
 
 Define a function: `makeCar()` that takes two parameters (model, color) and
 makes a new object literal for a car using those params, and returns that object.
 
-For example:
 ```js
 // This should return a car object just like the previous example
 var celica = makeCar("Toy-Yoda Celica", "limegreen");
 ```
-
 See solution in `car.js`
 
-## Constructor Functions (20 minutes - 30/150)
+
+## Constructor Functions
+
+### You-Do Exercise: Read [Understanding JavaScript Constructors] ](https://css-tricks.com/understanding-javascript-constructors/) (5 min)
+
+Read the First Few Paragraphs and STOP at **Object.defineProperty Function**
+
+<!--Please tilt laptops when finished reading -->
+
+### Turn & Talk- 1/4: Why might we want to use a constructor function in OOP to create objects? (5 min)
+
+### Overview of Constructor Functions (10 min)
 
 It's so common that we need to make objects with similar properties / methods
-that programming languages usually have some features to help with this. In
-Ruby, we have **classes** which can create **objects**, or **instances** of
-that class.
+that programming languages usually have some features to help with this.
 
-Javascript doesn't really have classes, instead we use constructor functions and
-prototypes to achieve similar results. (Note: the newest version, ES6, adds
-classes, but they're really just syntactic sugar, behind the scenes it's still
-using constructors and prototypes).
+In Javascript, we use constructor functions and
+prototypes. ***(Note: the newest version, ES6, adds
+classes, but they're really just syntactic sugar, behind the scenes it's still using constructors and prototypes)***
 
 Constructor functions are a lot like the `makeCar` function we just created, but
 they're supported by JS and we use the `new` keyword to use the constructor
 function.
+<!--maybe demonstrate that constructor is a property, All objects inherit a constructor property from their prototype:-->
 
 Note that constructor functions start with a capital letter to make it obvious
 that they are constructors. This isn't necessary, but is a convention and you
 should follow it!
 
+## Break (10 min)
+
+### I-Do: Make a Person Constructor Function (10 min)
+
 ```js
 function Person(initialName) {
   this.name = initialName;
   this.species = "Homo Sapiens";
-  this.speak = function() {return "Hello! I'm " + this.name};
+  this.speak = function() {
+    return "Hello! I'm " + this.name;
+  };
 }
 
 var adam = new Person("Adam");
@@ -179,8 +155,7 @@ bob.name // "Bob"
 bob.speak() // "Hello! I'm Bob"
 ```
 
-Notice the use of `this`, and the fact that we don't return anything. Here's why
-we write constructor functions this way:
+Notice the use of `this`, and the fact that we don't return anything. Here's why we write constructor functions this way:
 
 When we run a constructor function with `new`, Javascript will automatically:
 
@@ -188,19 +163,16 @@ When we run a constructor function with `new`, Javascript will automatically:
 2. Call the constructor function on that object (`this` -> the new object)
 3. Return the object
 
-### Exercise: Car Constructor Function (10 minutes - 50/150)
+### You-Do Exercise: Make a Car Constructor Function (10 min)
 
 Write a constructor function to replace our `makeCar` function earlier.
 
 See car.js for a solution.
 
-## Break (10 minutes 60/150)
-
-## Prototypes (20 minutes 70/150)
+## Prototypes (10 min)
 
 There's one problem with our constructor function... every time we create a new
-car, it's creating new copies of the `refuel` and `drive` functions. This isn't
-really necessary, since those functions are exactly the same for every car.
+car, it's creating new copies of the `refuel` and `drive` functions. This isn't really necessary, since those functions are exactly the same for every car.
 
 Creating all these copies can cause our program to use more memory than it
 really needs to.
@@ -221,7 +193,6 @@ function Dog(name, breed) {
 
 Dog.prototype.species = "Canis Canis";
 Dog.prototype.bark = function() { return "Woof! I'm " + this.name; }
-
 
 // OR Alternate form:
 // The disadvantage here is that we're overwriting any existing properties on
@@ -252,22 +223,26 @@ generally not a good idea to change the prototype directly by assigning to the
 **Note**: `.prototype` is a property on constructor functions, while `.__proto__` is the
 property on objects, and is used in the lookup chain.
 
-### Exercise: Car Constructor with Prototypes (10 minutes - 90/150)
+### You-Do Exercise: Car Constructor with Prototypes (10 min)
 
 Update the constructor function for our car to define the methods on prototypes
 rather than on the individual instances themselves.
 
 See `car.js` for a solution.
 
-## Exercise: Monkey (20 minutes - 100/150)
+## Break (10 min)
 
-Work on the [OOP Monkey Exercise](https://github.com/ga-dc/oop_monkey/tree/js) (same as in Ruby, now in JS!).
+### You-Do Exercise: Monkey (20 min)
+
+Work on the [OOP Monkey Exercise](https://github.com/ga-dc/oop_monkey/tree/js)
 
 Make sure you check out the `js` branch before beginning!
 
 `$ git checkout js`
 
-## Inheritance (15 minutes - 120/150)
+**Please Note:** You will be using a testing framework called Jasmine in this exercise that you will learn more about later on in the course. For now, we will only be creating functions in order to get the test to pass
+
+## Inheritance (10 min)
 
 In general, we're not going to be using inheritance with javascript, but it's
 worth just mentioning how it can be accomplished.
@@ -319,7 +294,7 @@ spot.breed;
 
 ![Prototypal Inheritance Chain](images/prototype_chain_inheritance.jpg)
 
-## Object.create (15 minutes - 135/150)
+## Object.create (5 min)
 
 So we won't use this often (if ever in this class), but you may see examples
 of using `Object.create`. This method creates a new object, and sets the
@@ -354,9 +329,16 @@ me.speak()
 me.species
 ```
 
+## Closing (5 min)
 
-## Sample Questions
+### Sample Quiz Questions
 
 * What are constructor functions and the new keyword? How are they related?
 * What is a prototype? Why do we care about them?
 * Describe how we use prototypes to set up inheritance in JS
+
+### Additional Resources:
+
+* [Eloquent JavaScript Chapter 6: The Secret Life of Objects](http://eloquentjavascript.net/06_object.html)
+* [Pivotal Blog Article](https://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword)
+* [W3Schools](http://www.w3schools.com/js/js_object_definition.asp)
