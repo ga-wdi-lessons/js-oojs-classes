@@ -53,7 +53,7 @@ things like:
 * respond to events like clicking buttons / links
 * send requests to the back end to fetch / update / destroy data
 
-### Creating Objects (10 min)
+### Creating Objects (5 min)
 
 So far, we've had to make our objects 'by hand', i.e. using object literals:
 
@@ -171,7 +171,7 @@ Write a constructor function to replace our `makeCar` function earlier.
 
 See car.js for a solution.
 
-## Prototypes (10 min)
+## Prototypes (15 min)
 
 There's one problem with our constructor function... every time we create a new
 car, it's creating new copies of the `refuel` and `drive` functions. This isn't really necessary, since those functions are exactly the same for every car.
