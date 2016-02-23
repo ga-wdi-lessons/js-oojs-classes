@@ -12,7 +12,7 @@
 - Compare `Object.create` vs constructors
 - Use the Chrome element inspector to traverse through the prototypal tree.
 
-## Framing: Importance of Object Oriented Programming (10 min)
+## Framing: Object Oriented Programming (10 min)
 
 Hi! This is an object: `{}`. Now you're oriented.
 
@@ -30,20 +30,20 @@ var game = {
   }
 };
 ```
-* What is an object in programming?
+**What is an object in programming?**
 
 >An object encapsulates related data and
-behavior.
->Objects help to create an organized structure to encapsulate this information
+behavior in an organized structure.
 
-* Why might we use an OOP approach to programming?
+**Why might we use an OOP approach to programming?**
 
->In summary, Object-oriented programming provides us
+>Object-oriented programming provides us
 with opportunities to clean up our procedural code and model it more-closely to the external world.
+
 >OOP helps us to achieve the following:
-1. Encapsulation
-2. Abstraction
-3. Modularity
+  * Encapsulation
+  * Abstraction
+  * Modularity
 
 OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front end to do
 things like:
@@ -106,13 +106,15 @@ See solution in `car.js`
 
 ## Constructor Functions
 
-### You-Do Exercise: Read [Understanding JavaScript Constructors] ](https://css-tricks.com/understanding-javascript-constructors/) (5 min)
+### You-Do Exercise: Read Understanding JavaScript Constructors (5 min)
 
-Read the First Few Paragraphs and STOP at **Object.defineProperty Function**
+[Understanding JavaScript Constructors](https://css-tricks.com/understanding-javascript-constructors/) 
+
+Read the First Few Paragraphs and STOP at **Object.defineProperty Function** Section! 
 
 <!--Please tilt laptops when finished reading -->
 
-### Turn & Talk- 1/4: Why might we want to use a constructor function in OOP to create objects? (5 min)
+#### Turn & Talk- 1/4: Why might we want to use a constructor function in OOP to create objects? (5 min)
 
 ### Overview of Constructor Functions (10 min)
 
