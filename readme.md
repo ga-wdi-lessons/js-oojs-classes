@@ -18,7 +18,7 @@ Hi! This is an object: `{}`. Now you're oriented.
 
 ![Bad joke](http://media.giphy.com/media/xn2BRZmrIJxmM/giphy.gif)
 
-We have exposure to objects in JavaScript, using object literal notation. Some of you might have used something like this in your first project:
+We have exposure to objects in JavaScript, using object literal notation. Some of you might have had something like this in your first project:
 
 ```js
 var game = {
