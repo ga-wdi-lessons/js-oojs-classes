@@ -106,10 +106,9 @@ See solution in `car.js`
 
 ### You-Do Exercise: Read JavaScript Constructors, Prototypes, and the 'new' Keyword (5 min)
 
-[Pivotal's Article: JavaScript Constructors, Prototypes, and the 'new' Keyword  Constructors](https://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword)
+[Article: JavaScript Constructors, Prototypes, and the 'new' Keyword  Constructors](https://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword)
 
-Read this short Article on JS Constructor Functions and Prototypes 
-
+While reading the article, think about why constructor functions and prototypes might be useful for us as developers.
 <!--Please tilt laptops when finished reading -->
 
 #### Turn & Talk- 1/4: Why might we want to use a constructor function in OOP to create objects? (5 min)
@@ -232,7 +231,7 @@ See `car.js` for a solution.
 
 Work on the [OOP Monkey Exercise](https://github.com/ga-dc/oop_monkey/tree/js)
 
-Make sure you check out the `js` branch before beginning!
+Make sure you check out the `javascript-constructor-functions` branch before beginning!
 
 `$ git checkout javascript-constructor-functions`
 
@@ -327,12 +326,15 @@ me.species
 
 ### Sample Quiz Questions
 
+* What are the benefits to using an OOP approach to programming?
 * What are constructor functions and the new keyword? How are they related?
 * What is a prototype? Why do we care about them?
 * Describe how we use prototypes to set up inheritance in JS
+* Why would we use a constructor function over an object literal?
 
 ### Additional Resources:
 
 * [Eloquent JavaScript Chapter 6: The Secret Life of Objects](http://eloquentjavascript.net/06_object.html)
-* [Pivotal Blog Article](https://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword)
+* [Raganwald: Prototypes Article](http://raganwald.com/2013/02/10/prototypes.html)
 * [W3Schools](http://www.w3schools.com/js/js_object_definition.asp)
+* [CSS Tricks: Understanding-Javascript-Constructors](https://css-tricks.com/understanding-javascript-constructors/)
