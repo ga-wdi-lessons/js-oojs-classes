@@ -6,11 +6,9 @@
 - Describe the role of constructor functions, and how they work
 - Use constructor functions and the `new` keyword to create objects with shared properties
 - Describe what a prototype object is, and how they are used in JS
-- Differentiate between `__proto__` and Animal.prototype
 - Diagram the relationship between an object, its constructor, and prototype
 - Compare / contrast classical and prototypal inheritance
 - Compare `Object.create` vs constructors
-- Use the Chrome element inspector to traverse through the prototypal tree.
 
 ## Framing: Object Oriented Programming (10 min)
 
@@ -41,8 +39,8 @@ behavior in an organized structure.
 with opportunities to clean up our procedural code and model it more-closely to the external world.
 
 >OOP helps us to achieve the following:
-  * Encapsulation
   * Abstraction
+  * Encapsulation
   * Modularity
 
 OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front end to do
@@ -106,11 +104,11 @@ See solution in `car.js`
 
 ## Constructor Functions
 
-### You-Do Exercise: Read Understanding JavaScript Constructors (5 min)
+### You-Do Exercise: Read JavaScript Constructors, Prototypes, and the 'new' Keyword (5 min)
 
-[Understanding JavaScript Constructors](https://css-tricks.com/understanding-javascript-constructors/) 
+[Pivotal's Article: JavaScript Constructors, Prototypes, and the 'new' Keyword  Constructors](https://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword)
 
-Read the First Few Paragraphs and STOP at **Object.defineProperty Function** Section! 
+Read this short Article on JS Constructor Functions and Prototypes 
 
 <!--Please tilt laptops when finished reading -->
 
@@ -218,10 +216,6 @@ rufus.bark() // "Hello! I'm Rufus"
 
 ![Prototype Chain Diagram - Simple](images/prototype_chain_simple.jpg)
 
-To see an object's prototype, you can look at the `.__proto__` property. It's
-generally not a good idea to change the prototype directly by assigning to the
-`__proto__` property.
-
 **Note**: `.prototype` is a property on constructor functions, while `.__proto__` is the
 property on objects, and is used in the lookup chain.
 
@@ -240,9 +234,7 @@ Work on the [OOP Monkey Exercise](https://github.com/ga-dc/oop_monkey/tree/js)
 
 Make sure you check out the `js` branch before beginning!
 
-`$ git checkout js`
-
-**Please Note:** You will be using a testing framework called Jasmine in this exercise that you will learn more about later on in the course. For now, we will only be creating functions in order to get the test to pass
+`$ git checkout javascript-constructor-functions`
 
 ## Inheritance (10 min)
 
