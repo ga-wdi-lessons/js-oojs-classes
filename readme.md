@@ -338,3 +338,4 @@ me.species
 * [Raganwald: Prototypes Article](http://raganwald.com/2013/02/10/prototypes.html)
 * [W3Schools](http://www.w3schools.com/js/js_object_definition.asp)
 * [CSS Tricks: Understanding-Javascript-Constructors](https://css-tricks.com/understanding-javascript-constructors/)
+* [JavaScript Prototype in Plain Language](http://javascriptissexy.com/javascript-prototype-in-plain-detailed-language/)
