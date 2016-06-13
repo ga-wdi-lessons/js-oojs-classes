@@ -322,6 +322,10 @@ me.speak()
 me.species
 ```
 
+## Bonus!
+
+ES6 introduces classes - syntactical sugar for working with prototypes and constructors - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+
 ## Closing (5 min)
 
 ### Sample Quiz Questions
