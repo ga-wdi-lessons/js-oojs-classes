@@ -118,7 +118,6 @@ Define a function `makeCar` that takes two parameters - `model` and `color` - an
 // This should return a car object just like the previous example
 var celica = makeCar("Toy-Yoda Celica", "limegreen");
 ```
-> See solution in `car.js`
 
 This is the basic idea behind OOP: we define a blueprint for an object and use it to generate multiple instances of it!
 
