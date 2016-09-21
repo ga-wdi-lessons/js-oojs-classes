@@ -470,9 +470,11 @@ It should also have the following methods...
 <details>
   <summary><strong>Solution (with Bonus)</strong></summary>
 
-  
+
 
 </details>
+
+-------
 
 ### Closing / Questions (10 minutes / 2:00)
 
@@ -482,12 +484,9 @@ It should also have the following methods...
 * How do we indicate that one class inherits from another?
 * What does `super` mean?
 
-### Additional Resources
+### Additional Reading
 
-* [Eloquent JavaScript Chapter 6: The Secret Life of Objects](http://eloquentjavascript.net/06_object.html)
-* [Raganwald: Prototypes Article](http://raganwald.com/2013/02/10/prototypes.html)
-* [W3Schools](http://www.w3schools.com/js/js_object_definition.asp)
-* [CSS Tricks: Understanding-Javascript-Constructors](https://css-tricks.com/understanding-javascript-constructors/)
-* [JavaScript Prototype in Plain Language](http://javascriptissexy.com/javascript-prototype-in-plain-detailed-language/)
-
-<!-- AM: Need to update with ES6 class resources -->
+* [MDN Documentation on Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+* [Introduction to Javascript ES6 Classes](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-classes/)
+* [Getters, Setters, and Organizing Responsibility in Javascript](http://raganwald.com/2015/08/24/ready-get-set-go.html)
+* [Static Members in ES6](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
