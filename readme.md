@@ -1,24 +1,22 @@
-# Javascript Prototypes and Constructors
+# Object Oriented Javascript and Classes
 
 ## Learning Objectives
 
 - Explain the importance of OOJS
-- Describe the role of ES6 Classes and how they work
+- Describe the role of ES2015 Classes and how they work
 - Use the `new` keyword to create objects with shared properties
-- Describe what a prototype object is, and how they are used in JS
-- Diagram the relationship between an object, its constructor, and prototype
-- Compare / contrast classical and prototypal inheritance
+- Create a class that inherits from another using the `extends` and `super` keywords
 
 ## Framing (10 minutes / 0:10)
 
 We've already gotten exposure to Javascript objects using object literal notation (i.e., the curly brackets). Some of you might have had something like this in your first project...
 
 ```js
-var game = {
+const game = {
   cards: document.querySelectorAll(".cards"),
   startingTime: 0,
   createBoard: function(){
-    var gameBoard = document.querySelector("#game-board")
+    let gameBoard = document.querySelector("#game-board")
     gameBoard.style.display = "inline";
   }
 };
@@ -27,10 +25,10 @@ var game = {
 What's nice about the above code snippet? Try answering that question by comparing it to this...
 
 ```js
-var cards = document.querySelectorAll(".cards");
-var startingTime = 0;
+let cards = document.querySelectorAll(".cards");
+let startingTime = 0;
 function createBoard(){
-  var gameBoard = document.querySelector("#game-board")
+  let gameBoard = document.querySelector("#game-board")
   gameBoard.style.display = "inline";
 }
 ```
@@ -134,7 +132,7 @@ class Car = {
   constructor(model, color){
     this.model = model;
     this.color = color;
-    fuel = 100;
+    this.fuel = 100;
   }
   drive(){
     this.fuel--;
@@ -170,7 +168,7 @@ class Person {
   }
 }
 
-var adrian = new Person("Adrian");
+const adrian = new Person("Adrian");
 adrian.speak(); // "Hello, I'm Adrian"
 ```
 
@@ -208,8 +206,72 @@ It should have the following methods...
 * `deposit`, which should decrease the amount of money by some input
 * `showBalance`, which should print the amount of money in the bank to the console.
 
-The `Atm` class a `transactionHistory` property which keeps track of the withdrawals and deposits made to the account.
+The `Atm` class has a `transactionHistory` property which keeps track of the withdrawals and deposits made to the account.
 * Make sure to indicate whether the transaction increased or decreased the amount of money in the bank.
+
+<details>
+  <summary><strong>Solution</strong></summary>
+
+  ```js
+  class Atm {
+    constructor(type){
+      this.type = type;
+      this.money = 0;
+      this.transactionHistory = [];
+    }
+    withdraw(amount){
+      this.money -= amount;
+      this.transactionHistory.push(-amount)
+    }
+    deposit(amount){
+      this.money += amount;
+      this.transactionHistory.push(amount)
+    }
+    showBalance(){
+      console.log("The current balance is:", this.money);
+    }
+  }
+
+  let savings = new Atm("savings");
+  ```
+
+</details>
+
+<details>
+  <summary><strong>Solution (with Bonus)</strong></summary>
+
+  ```js
+  class Atm {
+    constructor(type, backup=null){
+      this.type = type;
+      this.money = 0;
+      this.transactionHistory = [];
+      this.backupAccount = backup;
+    }
+    withdraw(amount){
+      this.money -= amount;
+      this.transactionHistory.push(-amount);
+      if(this.money < 0){
+        console.log("Dipping into savings!");
+        let difference = -this.money;
+        this.money = 0;
+        this.backupAccount.withdraw(difference);
+      }
+    }
+    deposit(amount){
+      this.money += amount;
+      this.transactionHistory.push(amount);
+    }
+    showBalance(){
+      console.log("The current balance is:", this.money);
+    }
+  }
+
+  let savings = new Atm("savings");
+  let checking = new Atm("checking", savings);
+  ```
+
+</details>
 
 #### Bonus
 
@@ -225,6 +287,8 @@ Give the `Atm` class a `backupAccount` property that can, optionally, contain a 
 
 Although OOP can help us keep our Javascript nice and clean, it's still easy to duplicate code when defining multiple classes. Consider the following example...
 
+<!-- AM: Insert blurb about what relationship Animal, Dog, Cat have, pre-code -->
+
 ```js
 class Dog {
   constructor(name, breed){
@@ -235,7 +299,7 @@ class Dog {
   }
   eat(food){
     this.diet.push(food);
-    console.log(diet);
+    console.log(this.diet);
   }
   bark(){
     return `Bark! Hello, this is dog. My name is ${this.name}`
@@ -251,7 +315,7 @@ class Cat {
   }
   eat(food){
     this.diet.push(food);
-    console.log(diet);
+    console.log(this.diet);
   }
   meow(){
     return `Meow! I am not a dog! My name is ${this.name}`
@@ -274,7 +338,7 @@ class Animal{
   }
   eat(food){
     this.diet.push(food);
-    console.log(diet);
+    console.log(this.diet);
   }
 }
 
@@ -328,7 +392,7 @@ const fido = new Dog("Fido", "Beagle", true);
 console.log(fido); // "dog is not defined"
 ```
 
-That didn't work out the way we expected. That's because we're forgetting one thing. When creating an instance of a child class, we need to make sure it invokes the Animal class.
+That didn't work out the way we expected. That's because we're forgetting one thing. When creating an instance of a child class, we need to make sure it invokes the constructor of the parent (`Animal`) class.
 
 We can do that using the keyword `super()`...
 
