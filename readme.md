@@ -429,8 +429,6 @@ It should inherit from `User`. An admin has the same properties and can run the 
 
 It should also have the following properties...
 * `accessLevel`, which is an arbitrary integer determined by some input
-* `totalUsers`, which is an integer that keeps track of how many users have been created so far
-  * Everytime a user is created, this value should be incremented by 1
 
 It should also have the following methods...
 * `overridePassword`, which should take another user and a new password as an argument. When executed, this method changes the password for the passed-in user.
@@ -438,6 +436,43 @@ It should also have the following methods...
 #### Bonus
 
 `Admin` should also have a `deleteUser` method, which takes a user instance as an input and then **DELETES IT FROM EXISTENCE**.
+
+<details>
+  <summary><strong>Solution</strong></summary>
+
+  ```js
+  class User {
+    constructor(username, password){
+      this.username = username;
+      this.password = password;
+    }
+    changePassword(newPassword){
+      this.password = newPassword;
+    }
+  }
+
+  class Admin extends User {
+    constructor(username, password, accessLevel){
+      super(username, password);
+      this.accessLevel = accessLevel;
+    }
+    overridePassword(user, newPassword){
+      user.changePassword(newPassword);
+    }
+  }
+
+  let normalUser = new User("john", "123");
+  let superUser = new Admin("webmaster", "w00t", 100);
+  ```
+
+</details>
+
+<details>
+  <summary><strong>Solution (with Bonus)</strong></summary>
+
+  
+
+</details>
 
 ### Closing / Questions (10 minutes / 2:00)
 
