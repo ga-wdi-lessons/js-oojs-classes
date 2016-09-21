@@ -188,21 +188,41 @@ When we generate a class instance using `new`, Javascript will automatically...
 
 Unlike object notation, you do not need to use commas when separating class methods.
 
-### You Do: Make a Student Class (15 minutes / 1:00)
+### You Do: Make an ATM Class (20 minutes / 1:05)
 
-> 10 minutes exercise. 5 minutes review.
+> 15 minutes exercise. 5 minutes review.
 
-Write a class representing a `Student` object. Each student instance should have...
-* A `name` and `major`. Each student should have different values for these properties.
-* A `grades` array. This should start out as the same for all students.
-* A `checkIn` method that, when run, prints `"Adrian is here!"`, where "Adrian" is replaced with the student's `name`.
-* A `gradeHomework` method that takes a letter grade as an argument and adds it to the student's `grades` array.
+```bash
+$ touch index.html script.js  # create html and js files
+$ open index.html # open index.html in the browser so you can test your code in the console
+$ atom . # open the files in Atom and start coding
+```
+
+For this exercise you will be creating an ATM class.
+
+It will have the following properties...
+* `type` (e.g., "checking"), which should be determined by some input
+* `money`, which should start out as `0`
+
+It should have the following methods...
+* `withdraw`, which should increase the amount of money by some input
+* `deposit`, which should decrease the amount of money by some input
+* `showBalance`, which should print the amount of money in the bank to the console.
+
+The `Atm` class a `transactionHistory` property which keeps track of the withdrawals and deposits made to the account.
+* Make sure to indicate whether the transaction increased or decreased the amount of money in the bank.
+
+#### Bonus
+
+Give the `Atm` class a `backupAccount` property that can, optionally, contain a reference to another instance of the class, determined by some input
+* Whenever an ATM's balance goes below zero, it will remove money from the instance stored in `backupAccount` so that its balance goes back to zero.
+* This should trigger a withdrawal in the back up account equal to the amount of money that was withdrawn from the original account.
 
 <!-- AM: Add solution. -->
 
-## Break (10 minutes / 1:10)
+## Break (10 minutes / 1:15)
 
-## Inheritance (15 minutes / 1:25)
+## Inheritance (15 minutes / 1:30)
 
 Although OOP can help us keep our Javascript nice and clean, it's still easy to duplicate code when defining multiple classes. Consider the following example...
 
@@ -329,7 +349,36 @@ class Dog extends Animal {
 
 > In order to give an instance of a child class context (i.e., be able to use `this`), you must call `super`.
 
-### Closing / Questions (5 minutes)
+### You Do: Inheritance (20 minutes / 1:50)
+
+> 15 minutes exercise. 5 minutes review.
+
+#### Create a `User` class.
+
+It should have the following properties...
+* `username`, determined by some input
+* `password`, determined by some input
+
+It should have the following methods...
+* `changePassword`, which allows a user to change his password to some other string
+
+#### Create an `Admin` class.
+
+It should inherit from `User`. An admin has the same properties and can run the same methods a user can.
+
+It should also have the following properties...
+* `accessLevel`, which is an arbitrary integer determined by some input
+* `totalUsers`, which is an integer that keeps track of how many users have been created so far
+  * Everytime a user is created, this value should be incremented by 1
+
+It should also have the following methods...
+* `overridePassword`, which should take another user and a new password as an argument. When executed, this method changes the password for the passed-in user.
+
+#### Bonus
+
+`Admin` should also have a `deleteUser` method, which takes a user instance as an input and then **DELETES IT FROM EXISTENCE**.
+
+### Closing / Questions (10 minutes / 2:00)
 
 * What are the benefits to using an OOP approach to programming?
 * What is a class? What is `new`? How are they related?
@@ -337,7 +386,7 @@ class Dog extends Animal {
 * How do we indicate that one class inherits from another?
 * What does `super` mean?
 
-### Additional Resources:
+### Additional Resources
 
 * [Eloquent JavaScript Chapter 6: The Secret Life of Objects](http://eloquentjavascript.net/06_object.html)
 * [Raganwald: Prototypes Article](http://raganwald.com/2013/02/10/prototypes.html)
@@ -346,11 +395,3 @@ class Dog extends Animal {
 * [JavaScript Prototype in Plain Language](http://javascriptissexy.com/javascript-prototype-in-plain-detailed-language/)
 
 <!-- AM: Need to update with ES6 class resources -->
-
-### You Do: Monkey (20 min)
-
-Work on the [OOP Monkey Exercise](https://github.com/ga-dc/oop_monkey/tree/js)
-
-Make sure you check out the `javascript-constructor-functions` branch before beginning!
-
-`$ git checkout javascript-constructor-functions`
