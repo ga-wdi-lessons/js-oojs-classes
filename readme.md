@@ -195,8 +195,6 @@ Unlike object notation, you do not need to use commas when separating class meth
 
 Although OOP can help us keep our Javascript nice and clean, it's still easy to duplicate code when defining multiple classes. Consider the following example...
 
-<!-- AM: Insert blurb about what relationship Animal, Dog, Cat have, pre-code -->
-
 ```js
 class Dog {
   constructor(name, breed, tail){
