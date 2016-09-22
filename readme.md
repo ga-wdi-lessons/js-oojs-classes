@@ -123,6 +123,33 @@ This is the basic idea behind OOP: we define a blueprint for an object and use i
 
 ### Overview (10 minutes / 0:35)
 
+If you want to follow along...
+
+```bash
+$ touch index.html script.js
+$ atom .
+$ open index.html
+```
+
+<details>
+
+  <summary><strong>Here's some starter HTML if you need it...</strong></summary>
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Classes Practice</title>
+  </head>
+  <body>
+
+  </body>
+  <script src="script.js"></script>
+  </html>
+  ```
+</details>
+
 It's so common that we need to make objects with similar properties and methods that programming languages usually have some features to help with this.
 
 In Javascript, we use an ES6 feature called **classes** to accomplish this. Here's a class that serves the same purpose as our car blueprint. We'll dive into the details in just a bit...
