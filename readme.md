@@ -1,59 +1,76 @@
-# Javascript Prototypes and Constructors
+# Object Oriented Javascript and Classes
 
 ## Learning Objectives
 
 - Explain the importance of OOJS
-- Describe the role of constructor functions, and how they work
-- Use constructor functions and the `new` keyword to create objects with shared properties
-- Describe what a prototype object is, and how they are used in JS
-- Diagram the relationship between an object, its constructor, and prototype
-- Compare / contrast classical and prototypal inheritance
-- Compare `Object.create` vs constructors
+- Describe the role of ES2015 Classes and how they work
+- Use the `new` keyword to create objects with shared properties
+- Create a class that inherits from another using the `extends` and `super` keywords
 
-## Framing: Object Oriented Programming (10 min)
+## Framing (10 minutes / 0:10)
 
-Hi! This is an object: `{}`. Now you're oriented.
-
-![Bad joke](http://media.giphy.com/media/xn2BRZmrIJxmM/giphy.gif)
-
-We have exposure to objects in JavaScript, using object literal notation. Some of you might have had something like this in your first project:
+We've already gotten exposure to Javascript objects using object literal notation (i.e., the curly brackets). Some of you might have had something like this in your first project...
 
 ```js
-var game = {
+const game = {
   cards: document.querySelectorAll(".cards"),
   startingTime: 0,
   createBoard: function(){
-    var gameBoard = document.querySelector("#game-board")
+    let gameBoard = document.querySelector("#game-board")
     gameBoard.style.display = "inline";
   }
 };
 ```
-**What is an object in programming?**
 
->An object encapsulates related data and
-behavior in an organized structure.
+What's nice about the above code snippet? Try answering that question by comparing it to this...
 
-**Why might we use an OOP approach to programming?**
+```js
+let cards = document.querySelectorAll(".cards");
+let startingTime = 0;
+function createBoard(){
+  let gameBoard = document.querySelector("#game-board")
+  gameBoard.style.display = "inline";
+}
+```
 
->Object-oriented programming provides us
-with opportunities to clean up our procedural code and model it more-closely to the external world.
+<details>
 
->OOP helps us to achieve the following:
+  <summary><strong>Some thoughts...</strong></summary>
+
+  > * Related properties and methods are packaged together.
+  > * Fewer global variables.
+  > * Readability.
+
+</details>
+
+#### How have we been writing code up until this point?
+
+We have been writing **procedural code**, which basically means we are writing and executing code as we need it. We'll define some variables and functions here, maybe some event listeners there. We end up with a lot of separate pieces that contribute to the overall functionality of an application.
+
+#### What is an object in programming?
+
+An object encapsulates related data and behavior in an organized structure.
+
+#### Why might we use an OOP approach to programming?
+
+Object-oriented programming (OOP) provides us with opportunities to clean up our procedural code and model it more-closely to the external world.
+
+OOP helps us to achieve the following...
   * Abstraction
   * Encapsulation
   * Modularity
 
 OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front end to do
-things like:
+things like...
 
-* render data from the back end
-* update the state of the page as data changes
-* respond to events like clicking buttons / links
-* send requests to the back end to fetch / update / destroy data
+* Render data from the back end
+* Update the state of the page as data changes
+* Respond to events like clicking buttons / links
+* Send requests to the back end to fetch / update / destroy data
 
-### Creating Objects (5 min)
+### Creating Objects (5 minutes / 0:15)
 
-So far, we've had to make our objects 'by hand', i.e. using object literals:
+So far, we've had to make our objects 'by hand' (i.e. using object literals)...
 
 ```js
 var celica = {
@@ -82,264 +99,242 @@ var civic = {
   }
 }
 ```
-Although we are taking an object-oriented approach to programming, notice how much duplication there is in that code! Just imagine if we needed a hundred cars in our app!! Our code would certainly not be considered "DRY".
 
-As you may have noticed, some of these properties change between cars (model
-and color), and others stay the same, for example, `fuel` starts at 100, and
-`drive` and `refuel` are the same functions for every car.
+Even though we're technically using objects to organize our code, we can see a noticeable amount of duplication. Just imagine if we needed a hundred cars in our app! Our code would certainly not be considered "DRY".
+
+As you may have noticed, some of these properties change between cars (`model` and `color`), and others stay the same. For example, `fuel` starts at 100, while the `drive` and `refuel` functions are the same for every car.
 
 Why don't we build a function that makes these objects for us!
 
-### You-Do Exercise: Create a makeCar function (10 min)
+### You Do Exercise: Create a `makeCar` Function (10 minutes / 0:25)
 
-Define a function: `makeCar()` that takes two parameters (model, color) and
-makes a new object literal for a car using those params, and returns that object.
+> 5 minutes exercise. 5 minutes review.
+
+Define a function `makeCar` that takes two parameters - `model` and `color` - and returns an object literal representing a car using those params.
 
 ```js
 // This should return a car object just like the previous example
 var celica = makeCar("Toy-Yoda Celica", "limegreen");
 ```
-See solution in `car.js`
 
+This is the basic idea behind OOP: we define a blueprint for an object and use it to generate multiple instances of it!
 
-## Constructor Functions
+## Classes
 
-### You-Do Exercise: Read JavaScript Constructors, Prototypes, and the 'new' Keyword (5 min)
+### Overview (10 minutes / 0:35)
 
-[Article: JavaScript Constructors, Prototypes, and the 'new' Keyword  Constructors](https://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword)
+It's so common that we need to make objects with similar properties and methods that programming languages usually have some features to help with this.
 
-While reading the article, think about why constructor functions and prototypes might be useful for us as developers.
-<!--Please tilt laptops when finished reading -->
-
-#### Turn & Talk- 1/4: Why might we want to use a constructor function in OOP to create objects? (5 min)
-
-### Overview of Constructor Functions (10 min)
-
-It's so common that we need to make objects with similar properties / methods
-that programming languages usually have some features to help with this.
-
-In Javascript, we use constructor functions and
-prototypes. ***(Note: the newest version, ES6, adds
-classes, but they're really just syntactic sugar, behind the scenes it's still using constructors and prototypes)***
-
-Constructor functions are a lot like the `makeCar` function we just created, but
-they're supported by JS and we use the `new` keyword to use the constructor
-function.
-<!--maybe demonstrate that constructor is a property, All objects inherit a constructor property from their prototype:-->
-
-Note that constructor functions start with a capital letter to make it obvious
-that they are constructors. This isn't necessary, but is a convention and you
-should follow it!
-
-## Break (10 min)
-
-### I-Do: Make a Person Constructor Function (10 min)
+In Javascript, we use an ES6 feature called **classes** to accomplish this. Here's a class that serves the same purpose as our car blueprint. We'll dive into the details in just a bit...
 
 ```js
-function Person(initialName) {
-  this.name = initialName;
-  this.species = "Homo Sapiens";
-  this.speak = function() {
-    return "Hello! I'm " + this.name;
-  };
+class Car = {
+  constructor(model, color){
+    this.model = model;
+    this.color = color;
+    this.fuel = 100;
+  }
+  drive(){
+    this.fuel--;
+    return "Vroom!";
+  }
+  refuel(){
+    this.fuel = 100;
+  }
 }
 
-var adam = new Person("Adam");
-var bob =  new Person("Bob");
-
-adam.name // "Adam"
-adam.speak() // "Hello! I'm Adam"
-
-bob.name // "Bob"
-bob.speak() // "Hello! I'm Bob"
+const celica = new Car("Toy-Yoda Celica", "limegreen");
+const civic = new Car("Honda Civic", "lemonchiffon");
 ```
 
-Notice the use of `this`, and the fact that we don't return anything. Here's why we write constructor functions this way:
+Classes are a lot like the `makeCar` function we just created, but they're supported by JS and we use the `new` keyword to generate instances of an object (just like our earlier `celica` and `civic` examples).
 
-When we run a constructor function with `new`, Javascript will automatically:
+> Note that classes start with a capital letter to make it obvious
+that they are constructors. This isn't necessary, but is a convention you should follow.
 
-1. Create an new, empty object for us.
-2. Call the constructor function on that object (`this` -> the new object)
-3. Return the object
-
-### You-Do Exercise: Make a Car Constructor Function (10 min)
-
-Write a constructor function to replace our `makeCar` function earlier.
-
-See car.js for a solution.
-
-## Prototypes (15 min)
-
-There's one problem with our constructor function... every time we create a new
-car, it's creating new copies of the `refuel` and `drive` functions. This isn't really necessary, since those functions are exactly the same for every car.
-
-Creating all these copies can cause our program to use more memory than it
-really needs to.
-
-Thankfully, by using **prototypes**, we can eliminate this duplication. Every
-object in JS has a `prototype` property, that points to another **object**.
-Almost always, the prototype of a given object will come from it's
-**constructor** (which has a prototype).
-
-Any properties / methods defined on an object's prototype are available on the
-that object. An example:
+### I Do: Make a Person Class (10 minutes / 0:45)
 
 ```js
-function Dog(name, breed) {
-  this.name = name;
-  this.breed = breed;
+class Person {
+  // We use the constructor method to initialize properties for a class instance.
+  // It takes whatever arguments we want to pass into an instance.
+  constructor(initialName){
+    this.name = initialName;
+    this.species = "Homo Sapiens";
+  }
+  // We define any methods accessible to an instance outside of the constructor
+  speak(){
+    return `Hello! I'm ${this.name}`;
+  }
 }
 
-Dog.prototype.species = "Canis Canis";
-Dog.prototype.bark = function() { return "Woof! I'm " + this.name; }
-
-// OR Alternate form:
-// The disadvantage here is that we're overwriting any existing properties on
-// the prototype
-Dog.prototype = {
-  species: "Canis Canis",
-  speak: function() { return "Woof! I'm " + this.name; }
-}
-
-// Our objects work just as they did before!
-var spot = new Dog("Spot", "Beagle");
-var rufus =  new Dog("Rufus", "Poodle");
-
-spot.name // "Spot"
-spot.breed // "Beagle"
-spot.bark() // "Hello! I'm Spot"
-
-rufus.name // "Rufus"
-rufus.bark() // "Hello! I'm Rufus"
+const adrian = new Person("Adrian");
+adrian.speak(); // "Hello, I'm Adrian"
 ```
 
-![Prototype Chain Diagram - Simple](images/prototype_chain_simple.jpg)
+#### `this`
 
-**Note**: `.prototype` is a property on constructor functions, while `.__proto__` is the
-property on objects, and is used in the lookup chain.
+Notice the use of `this`, and the fact that we don't return from the class. Here's why we write classes this way...
 
-### You-Do Exercise: Car Constructor with Prototypes (10 min)
+When we generate a class instance using `new`, Javascript will automatically...
+  1. Create an new, empty object for us  
+  2. Generate a context for that object (`this` -> the new object)  
+  3. Return the object  
 
-Update the constructor function for our car to define the methods on prototypes
-rather than on the individual instances themselves.
+#### Where are the Commas?
 
-See `car.js` for a solution.
+Unlike object notation, you do not need to use commas when separating class methods.
 
-## Break (10 min)
+### You Do: [Make an ATM Class](https://github.com/ga-wdi-exercises/es6-classes-practice) (20 minutes / 1:05)
 
-### You-Do Exercise: Monkey (20 min)
+> 15 minutes exercise. 5 minutes review.
 
-Work on the [OOP Monkey Exercise](https://github.com/ga-dc/oop_monkey/tree/js)
+## Break (10 minutes / 1:15)
 
-Make sure you check out the `javascript-constructor-functions` branch before beginning!
+## Inheritance (15 minutes / 1:30)
 
-`$ git checkout javascript-constructor-functions`
-
-## Inheritance (10 min)
-
-In general, we're not going to be using inheritance with javascript, but it's
-worth just mentioning how it can be accomplished.
+Although OOP can help us keep our Javascript nice and clean, it's still easy to duplicate code when defining multiple classes. Consider the following example...
 
 ```js
-////////////////////////////////
-// Animal (Parent) Class
-////////////////////////////////
-function Animal( name ){
-  this.name = name;
+class Dog {
+  constructor(name, breed, tail){
+    this.name = name;
+    this.breed = breed;
+    this.waggingTail = tail;
+    this.diet = [];
+  }
+  eat(food){
+    this.diet.push(food);
+    console.log(this.diet);
+  }
+  bark(){
+    return `Bark! Hello, this is dog. My name is ${this.name}`
+  }
 }
 
-Animal.prototype.kingdom = "Animalia";
-Animal.prototype.breathe = function() {console.log("Inhale... exhale...")};
+class Cat {
+  constructor(name, breed, numLives){
+    this.name = name;
+    this.breed = breed;
+    this.numLives = numLives;
+    this.diet = [];
+  }
+  eat(food){
+    this.diet.push(food);
+    console.log(this.diet);
+  }
+  meow(){
+    return `Meow! I am not a dog! My name is ${this.name}`
+  }
+}
+```
 
+Here we have two classes: `Dog` and `Cat`. They have some things in common: `name`, `breed`, `diet` and `eat`. They do differ, however, in that one `bark`s and the other `meow`s.
 
-////////////////////////////////
-// HELLO THIS IS DOG
-////////////////////////////////
-function Dog(name, breed){
-  this.name = name;
-  this.breed = breed;
+Imagine that we had to create a number of other classes - `Horse`, `Goat`, `Pig`, etc. - all of which share the same aforementioned properties but also have methods that are particular to the class.
+
+How could we refactor this so that we don't have to keep writing out the shared class properties and methods. Enter **inheritance**...
+
+```js
+class Animal{
+  constructor(name, breed){
+    this.name = name;
+    this.breed = breed;
+    this.diet = [];
+  }
+  eat(food){
+    this.diet.push(food);
+    console.log(this.diet);
+  }
 }
 
-// Important! Set up the link in the prototype chain connecting Dogs to Animals
-Dog.prototype = new Animal();
-
-// Add any methods / properties shared by all dogs.
-Dog.prototype.bark = function(){ console.log("Woof")};
-Dog.prototype.species = "Canis canis"
-
-////////////////////////////////
-// Testing our dawgs
-////////////////////////////////
-var spot = new Dog("Spot", "Beagle");
-
-// from Animal prototype
-spot.kingdom;
-spot.breathe();
-
-// from Dog prototype
-spot.bark();
-spot.species;
-
-// from Dog properties
-spot.name;
-spot.breed;
+const dog = new Animal("Fido", "Beagle");
 ```
 
-![Prototypal Inheritance Chain](images/prototype_chain_inheritance.jpg)
+Here we've defined an `Animal` class. It contains the properties and methods that are common among specific animal classes. Wouldn't it be nice if `Dog` and `Cat` could just reference this "parent" `Animal` class so that the only things we need to put in their "child" class definitions are the properties and methods that are particular to them (e.g., `bark`, `meow`).
 
-## Object.create (5 min)
-
-So we won't use this often (if ever in this class), but you may see examples
-of using `Object.create`. This method creates a new object, and sets the
-prototype of the new object to be the existing object.
-
-An example might help:
+Lucky for us, we can do that...
 
 ```js
-var Person = {
-  species: "Homo Sapiens",
-  speak: function() { console.log("Hello")}
-};
+class Animal {
+  constructor(name, breed){
+    this.name = name;
+    this.breed = breed;
+    this.diet = [];
+  }
+  eat(food){
+    this.diet.push(food);
+    console.log(diet);
+  }
+}
 
-var me = Object.create(Person);
+class Dog extends Animal {
+  constructor(name, breed, tail){
+    this.waggingTail = tail;
+  }
+  bark(){
+    return `Bark! Hello, this is dog. My name is ${this.name}`
+  }
+}
 
-me.speak();
-me.species;
+class Cat extends Animal {
+  constructor(name, breed, numLives){
+    this.numLives = numLives;
+  }
+  meow(){
+    return `Meow! I am not a dog! My name is ${this.name}`
+  }
+}
 ```
 
-Just like before, we can use `this` inside our methods:
+The clincher is `extends`. Whatever class is to the left of the `extends` keyword should inherit the properties and methods that belongs to the class to the right of the keyword. Let's see if this works...
 
 ```js
-var Person = {
-  species: "Homo Sapiens",
-  speak: function() { console.log("Hello! I'm " + this.name)}
-};
+// Let's test out our parent. It just needs a name and breed.
+const goat = new Animal("Gregory", "Mountain Goat");
 
-var me = Object.create(Person);
-me.name = "Adam";
-
-me.speak()
-me.species
+// And now the children.
+const fido = new Dog("Fido", "Beagle", true);
+console.log(fido); // "this is not defined"
 ```
 
-## Bonus!
+That didn't work out the way we expected. That's because we're forgetting one thing. When creating an instance of a child class, we need to make sure it invokes the constructor of the parent (`Animal`) class.
 
-ES6 introduces classes - syntactical sugar for working with prototypes and constructors - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+We can do that using the keyword `super()`...
 
-## Closing (5 min)
+```js
+class Dog extends Animal {
+  constructor(name, breed, tail){
+    super(name, breed);
+    this.waggingTail = tail;
+  }
+  bark(){
+    return `Bark! Hello, this is dog. My name is ${this.name}`
+  }
+}
+```
 
-### Sample Quiz Questions
+`super()` calls the constructor of the parent class. In the above example, once `super` does what it needs to do, it then runs through the rest of `Dog`s constructor.
+
+> In order to give an instance of a child class context (i.e., be able to use `this`), you must call `super`.
+
+### You Do: [Inheritance](https://github.com/ga-wdi-exercises/es6-classes-inheritance-practice) (20 minutes / 1:50)
+
+> 15 minutes exercise. 5 minutes review.
+
+-------
+
+### Closing / Questions (10 minutes / 2:00)
 
 * What are the benefits to using an OOP approach to programming?
-* What are constructor functions and the new keyword? How are they related?
-* What is a prototype? Why do we care about them?
-* Describe how we use prototypes to set up inheritance in JS
-* Why would we use a constructor function over an object literal?
+* What is a class? What is `new`? How are they related?
+* What does it mean to use "inheritance" when working with classes?
+* How do we indicate that one class inherits from another?
+* What does `super` mean?
 
-### Additional Resources:
+### Additional Reading
 
-* [Eloquent JavaScript Chapter 6: The Secret Life of Objects](http://eloquentjavascript.net/06_object.html)
-* [Raganwald: Prototypes Article](http://raganwald.com/2013/02/10/prototypes.html)
-* [W3Schools](http://www.w3schools.com/js/js_object_definition.asp)
-* [CSS Tricks: Understanding-Javascript-Constructors](https://css-tricks.com/understanding-javascript-constructors/)
-* [JavaScript Prototype in Plain Language](http://javascriptissexy.com/javascript-prototype-in-plain-detailed-language/)
+* [MDN Documentation on Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+* [Introduction to Javascript ES6 Classes](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-classes/)
+* [Getters, Setters, and Organizing Responsibility in Javascript](http://raganwald.com/2015/08/24/ready-get-set-go.html)
+* [Static Members in ES6](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
