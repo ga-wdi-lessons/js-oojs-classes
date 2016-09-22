@@ -185,99 +185,9 @@ When we generate a class instance using `new`, Javascript will automatically...
 
 Unlike object notation, you do not need to use commas when separating class methods.
 
-### You Do: Make an ATM Class (20 minutes / 1:05)
+### You Do: [Make an ATM Class](https://github.com/ga-wdi-exercises/es6-classes-practice) (20 minutes / 1:05)
 
 > 15 minutes exercise. 5 minutes review.
-
-```bash
-$ touch index.html script.js  # create html and js files
-$ open index.html # open index.html in the browser so you can test your code in the console
-$ atom . # open the files in Atom and start coding
-```
-
-For this exercise you will be creating an ATM class.
-
-It will have the following properties...
-* `type` (e.g., "checking"), which should be determined by some input
-* `money`, which should start out as `0`
-
-It should have the following methods...
-* `withdraw`, which should increase the amount of money by some input
-* `deposit`, which should decrease the amount of money by some input
-* `showBalance`, which should print the amount of money in the bank to the console.
-
-The `Atm` class has a `transactionHistory` property which keeps track of the withdrawals and deposits made to the account.
-* Make sure to indicate whether the transaction increased or decreased the amount of money in the bank.
-
-#### Bonus
-
-Give the `Atm` class a `backupAccount` property that can, optionally, contain a reference to another instance of the class, determined by some input
-* Whenever an ATM's balance goes below zero, it will remove money from the instance stored in `backupAccount` so that its balance goes back to zero.
-* This should trigger a withdrawal in the back up account equal to the amount of money that was withdrawn from the original account.
-
-<details>
-  <summary><strong>Solution</strong></summary>
-
-  ```js
-  class Atm {
-    constructor(type){
-      this.type = type;
-      this.money = 0;
-      this.transactionHistory = [];
-    }
-    withdraw(amount){
-      this.money -= amount;
-      this.transactionHistory.push(-amount)
-    }
-    deposit(amount){
-      this.money += amount;
-      this.transactionHistory.push(amount)
-    }
-    showBalance(){
-      console.log("The current balance is:", this.money);
-    }
-  }
-
-  let savings = new Atm("savings");
-  ```
-
-</details>
-
-<details>
-  <summary><strong>Solution (with Bonus)</strong></summary>
-
-  ```js
-  class Atm {
-    constructor(type, backup=null){
-      this.type = type;
-      this.money = 0;
-      this.transactionHistory = [];
-      this.backupAccount = backup;
-    }
-    withdraw(amount){
-      this.money -= amount;
-      this.transactionHistory.push(-amount);
-      if(this.money < 0){
-        console.log("Dipping into savings!");
-        let difference = -this.money;
-        this.money = 0;
-        this.backupAccount.withdraw(difference);
-      }
-    }
-    deposit(amount){
-      this.money += amount;
-      this.transactionHistory.push(amount);
-    }
-    showBalance(){
-      console.log("The current balance is:", this.money);
-    }
-  }
-
-  let savings = new Atm("savings");
-  let checking = new Atm("checking", savings);
-  ```
-
-</details>
 
 ## Break (10 minutes / 1:15)
 
@@ -289,10 +199,10 @@ Although OOP can help us keep our Javascript nice and clean, it's still easy to 
 
 ```js
 class Dog {
-  constructor(name, breed){
+  constructor(name, breed, tail){
     this.name = name;
     this.breed = breed;
-    this.waggingTail = true;
+    this.waggingTail = tail;
     this.diet = [];
   }
   eat(food){
@@ -305,10 +215,10 @@ class Dog {
 }
 
 class Cat {
-  constructor(name, breed){
+  constructor(name, breed, numLives){
     this.name = name;
     this.breed = breed;
-    this.numLives = 9;
+    this.numLives = numLives;
     this.diet = [];
   }
   eat(food){
@@ -362,7 +272,7 @@ class Animal {
 
 class Dog extends Animal {
   constructor(name, breed, tail){
-    this.waggingTail = true;
+    this.waggingTail = tail;
   }
   bark(){
     return `Bark! Hello, this is dog. My name is ${this.name}`
@@ -370,8 +280,8 @@ class Dog extends Animal {
 }
 
 class Cat extends Animal {
-  constructor(name, breed, lives){
-    this.numLives = lives;
+  constructor(name, breed, numLives){
+    this.numLives = numLives;
   }
   meow(){
     return `Meow! I am not a dog! My name is ${this.name}`
@@ -387,7 +297,7 @@ const goat = new Animal("Gregory", "Mountain Goat");
 
 // And now the children.
 const fido = new Dog("Fido", "Beagle", true);
-console.log(fido); // "dog is not defined"
+console.log(fido); // "this is not defined"
 ```
 
 That didn't work out the way we expected. That's because we're forgetting one thing. When creating an instance of a child class, we need to make sure it invokes the constructor of the parent (`Animal`) class.
@@ -398,7 +308,7 @@ We can do that using the keyword `super()`...
 class Dog extends Animal {
   constructor(name, breed, tail){
     super(name, breed);
-    this.waggingTail = true;
+    this.waggingTail = tail;
   }
   bark(){
     return `Bark! Hello, this is dog. My name is ${this.name}`
