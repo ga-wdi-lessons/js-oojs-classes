@@ -318,69 +318,9 @@ class Dog extends Animal {
 
 > In order to give an instance of a child class context (i.e., be able to use `this`), you must call `super`.
 
-### You Do: Inheritance (20 minutes / 1:50)
+### You Do: [Inheritance](https://github.com/ga-wdi-exercises/es6-classes-inheritance-practice) (20 minutes / 1:50)
 
 > 15 minutes exercise. 5 minutes review.
-
-#### Create a `User` class.
-
-It should have the following properties...
-* `username`, determined by some input
-* `password`, determined by some input
-
-It should have the following methods...
-* `changePassword`, which allows a user to change his password to some other string
-
-#### Create an `Admin` class.
-
-It should inherit from `User`. An admin has the same properties and can run the same methods a user can.
-
-It should also have the following properties...
-* `accessLevel`, which is an arbitrary integer determined by some input
-
-It should also have the following methods...
-* `overridePassword`, which should take another user and a new password as an argument. When executed, this method changes the password for the passed-in user.
-
-#### Bonus
-
-`Admin` should also have a `deleteUser` method, which takes a user instance as an input and then **DELETES IT FROM EXISTENCE**.
-
-<details>
-  <summary><strong>Solution</strong></summary>
-
-  ```js
-  class User {
-    constructor(username, password){
-      this.username = username;
-      this.password = password;
-    }
-    changePassword(newPassword){
-      this.password = newPassword;
-    }
-  }
-
-  class Admin extends User {
-    constructor(username, password, accessLevel){
-      super(username, password);
-      this.accessLevel = accessLevel;
-    }
-    overridePassword(user, newPassword){
-      user.changePassword(newPassword);
-    }
-  }
-
-  let normalUser = new User("john", "123");
-  let superUser = new Admin("webmaster", "w00t", 100);
-  ```
-
-</details>
-
-<details>
-  <summary><strong>Solution (with Bonus)</strong></summary>
-
-
-
-</details>
 
 -------
 
