@@ -155,7 +155,7 @@ It's so common that we need to make objects with similar properties and methods 
 In Javascript, we use an ES6 feature called **classes** to accomplish this. Here's a class that serves the same purpose as our car blueprint. We'll dive into the details in just a bit...
 
 ```js
-class Car = {
+class Car {
   constructor(model, color){
     this.model = model;
     this.color = color;
