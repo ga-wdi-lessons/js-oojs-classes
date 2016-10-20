@@ -13,11 +13,11 @@ We've already gotten exposure to Javascript objects using object literal notatio
 
 ```js
 const game = {
-  cards: document.querySelectorAll(".cards"),
+  cards: $(".cards"),
   startingTime: 0,
   createBoard: function(){
-    let gameBoard = document.querySelector("#game-board")
-    gameBoard.style.display = "inline";
+    let gameBoard = $("#game-board")
+    gameBoard.css("display", "inline")
   }
 };
 ```
@@ -25,11 +25,11 @@ const game = {
 What's nice about the above code snippet? Try answering that question by comparing it to this...
 
 ```js
-let cards = document.querySelectorAll(".cards");
+let cards = $(".cards")
 let startingTime = 0;
 function createBoard(){
-  let gameBoard = document.querySelector("#game-board")
-  gameBoard.style.display = "inline";
+  let gameBoard = $("#game-board")
+  gameBoard.css("display", "inline")
 }
 ```
 
@@ -177,7 +177,7 @@ const civic = new Car("Honda Civic", "lemonchiffon");
 Classes are a lot like the `makeCar` function we just created, but they're supported by JS and we use the `new` keyword to generate instances of an object (just like our earlier `celica` and `civic` examples).
 
 > Note that classes start with a capital letter to make it obvious
-that they are constructors. This isn't necessary, but is a convention you should follow.
+that they are classes. This isn't necessary, but is a convention you should follow.
 
 ### I Do: Make a Person Class (10 minutes / 0:45)
 
@@ -204,7 +204,7 @@ adrian.speak(); // "Hello, I'm Adrian"
 Notice the use of `this`, and the fact that we don't return from the class. Here's why we write classes this way...
 
 When we generate a class instance using `new`, Javascript will automatically...
-  1. Create an new, empty object for us  
+  1. Create a new, empty object for us  
   2. Generate a context for that object (`this` -> the new object)  
   3. Return the object  
 
