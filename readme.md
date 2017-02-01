@@ -403,3 +403,4 @@ We will not be explicitly covering prototypical inheritance in this course. If y
 * [Introduction to Javascript ES6 Classes](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-classes/)
 * [Getters, Setters, and Organizing Responsibility in Javascript](http://raganwald.com/2015/08/24/ready-get-set-go.html)
 * [Static Members in ES6](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
+* [Lesson: JS View Classes](https://github.com/ga-wdi-lessons/js-view-classes)
