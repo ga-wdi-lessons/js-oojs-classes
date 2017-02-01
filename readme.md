@@ -3,7 +3,7 @@
 ## Learning Objectives
 
 - Explain the importance of OOJS
-- Describe the role of ES2015 Classes and how they work
+- Describe the role of ES6 Classes and how they work
 - Use the `new` keyword to create objects with shared properties
 - Create a class that inherits from another using the `extends` and `super` keywords
 
@@ -116,6 +116,31 @@ Define a function `makeCar` that takes two parameters - `model` and `color` - an
 // This should return a car object just like the previous example
 var celica = makeCar("Toy-Yoda Celica", "limegreen");
 ```
+
+<details>
+  <summary><strong>Solution...</strong></summary>
+
+  ```js
+  // ES5
+  function makeCar(model, color){
+    return {
+      model: model,
+      color: color
+    }
+  }
+  ```
+
+  ```js
+  // ES6
+  function makeCar(model, color){
+    return {
+      model: model,
+      color: color
+    }
+  }
+  ```
+
+</details>
 
 This is the basic idea behind OOP: we define a blueprint for an object and use it to generate multiple instances of it!
 
@@ -350,6 +375,17 @@ class Dog extends Animal {
 > 15 minutes exercise. 5 minutes review.
 
 -------
+
+### Further Reading: Class vs. Prototypical Inheritance
+
+When reading about object oriented programming, you'll come across two popular paradigms: **class** vs. **prototypical**. Examples of class-based programming languages are Ruby and Java. Even though we are using something called a "class" in Javascript, however, Javascript employs prototypical inheritance.
+
+Classes became a part of Javascript with the implementation of ES6. Under the hood, however, classes are using constructor functions and prototypes, two fundamental tools that were used to implement OOJS prior to ES6.
+
+We will not be explicitly covering prototypical inheritance in this course. If you are interested in learning more, however, check out these resources...
+* [Inheritance and the Prototype Chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+* [ES6 Classes and Javascript Prototypes](https://reinteractive.com/posts/235-es6-classes-and-javascript-prototypes)
+* [Master the Javascript Interview: What's the Difference Between Class & Prototypical Inheritance](https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9#.uzl8ohf8c)
 
 ### Closing / Questions (10 minutes / 2:00)
 
