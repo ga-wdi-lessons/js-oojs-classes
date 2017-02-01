@@ -395,6 +395,8 @@ We will not be explicitly covering prototypical inheritance in this course. If y
 * How do we indicate that one class inherits from another?
 * What does `super` mean?
 
+### Homework: [Geometry](https://github.com/ga-wdi-exercises/js_geometry)
+
 ### Additional Reading
 
 * [MDN Documentation on Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
