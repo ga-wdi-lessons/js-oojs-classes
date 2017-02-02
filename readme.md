@@ -60,13 +60,10 @@ OOP helps us to achieve the following...
   * Encapsulation
   * Modularity
 
-OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front end to do
-things like...
-
-* Render data from the back end
+OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front-end to do things like...
+* Send requests to a back-end to fetch / update / destroy data
 * Update the state of the page as data changes
-* Respond to events like clicking buttons / links
-* Send requests to the back end to fetch / update / destroy data
+* Respond to events like clicking buttons
 
 ### Creating Objects (5 minutes / 0:15)
 
