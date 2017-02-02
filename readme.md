@@ -60,13 +60,10 @@ OOP helps us to achieve the following...
   * Encapsulation
   * Modularity
 
-OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front end to do
-things like...
-
-* Render data from the back end
+OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front-end to do things like...
+* Send requests to a back-end to fetch / update / destroy data
 * Update the state of the page as data changes
-* Respond to events like clicking buttons / links
-* Send requests to the back end to fetch / update / destroy data
+* Respond to events like clicking buttons
 
 ### Creating Objects (5 minutes / 0:15)
 
@@ -116,6 +113,31 @@ Define a function `makeCar` that takes two parameters - `model` and `color` - an
 // This should return a car object just like the previous example
 var celica = makeCar("Toy-Yoda Celica", "limegreen");
 ```
+
+<details>
+  <summary><strong>Solution...</strong></summary>
+
+  ```js
+  // ES5
+  function makeCar(model, color){
+    return {
+      model: model,
+      color: color
+    }
+  }
+  ```
+
+  ```js
+  // ES6
+  let makeCar = (model, color) => {
+    return {
+      model: model,
+      color: color
+    }
+  }
+  ```
+
+</details>
 
 This is the basic idea behind OOP: we define a blueprint for an object and use it to generate multiple instances of it!
 
@@ -345,13 +367,13 @@ class Dog extends Animal {
 
 > In order to give an instance of a child class context (i.e., be able to use `this`), you must call `super`.
 
-### You Do: [Inheritance](https://github.com/ga-wdi-exercises/es6-classes-inheritance-practice) (20 minutes / 1:50)
+## You Do: [Inheritance](https://github.com/ga-wdi-exercises/es6-classes-inheritance-practice) (20 minutes / 1:50)
 
 > 15 minutes exercise. 5 minutes review.
 
 -------
 
-### Closing / Questions (10 minutes / 2:00)
+## Closing / Questions (10 minutes / 2:00)
 
 * What are the benefits to using an OOP approach to programming?
 * What is a class? What is `new`? How are they related?
@@ -359,9 +381,18 @@ class Dog extends Animal {
 * How do we indicate that one class inherits from another?
 * What does `super` mean?
 
-### Additional Reading
+## Homework: [Geometry](https://github.com/ga-wdi-exercises/js_geometry)
+
+## Additional Reading
 
 * [MDN Documentation on Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 * [Introduction to Javascript ES6 Classes](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-classes/)
 * [Getters, Setters, and Organizing Responsibility in Javascript](http://raganwald.com/2015/08/24/ready-get-set-go.html)
 * [Static Members in ES6](http://odetocode.com/blogs/scott/archive/2015/02/02/static-members-in-es6.aspx)
+* [Lesson: JS View Classes](https://github.com/ga-wdi-lessons/js-view-classes)
+
+#### Prototypical Inheritance
+
+* [Inheritance and the Prototype Chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+* [ES6 Classes and Javascript Prototypes](https://reinteractive.com/posts/235-es6-classes-and-javascript-prototypes)
+* [Master the Javascript Interview: What's the Difference Between Class & Prototypical Inheritance](https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9#.uzl8ohf8c)
