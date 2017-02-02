@@ -370,13 +370,13 @@ class Dog extends Animal {
 
 > In order to give an instance of a child class context (i.e., be able to use `this`), you must call `super`.
 
-### You Do: [Inheritance](https://github.com/ga-wdi-exercises/es6-classes-inheritance-practice) (20 minutes / 1:50)
+## You Do: [Inheritance](https://github.com/ga-wdi-exercises/es6-classes-inheritance-practice) (20 minutes / 1:50)
 
 > 15 minutes exercise. 5 minutes review.
 
 -------
 
-### Closing / Questions (10 minutes / 2:00)
+## Closing / Questions (10 minutes / 2:00)
 
 * What are the benefits to using an OOP approach to programming?
 * What is a class? What is `new`? How are they related?
@@ -384,9 +384,9 @@ class Dog extends Animal {
 * How do we indicate that one class inherits from another?
 * What does `super` mean?
 
-### Homework: [Geometry](https://github.com/ga-wdi-exercises/js_geometry)
+## Homework: [Geometry](https://github.com/ga-wdi-exercises/js_geometry)
 
-### Additional Reading
+## Additional Reading
 
 * [MDN Documentation on Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 * [Introduction to Javascript ES6 Classes](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-classes/)
