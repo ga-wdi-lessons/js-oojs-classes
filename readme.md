@@ -57,7 +57,7 @@ Object-oriented programming (OOP) provides us with opportunities to clean up our
 
 OOP helps us to achieve the following...
   * Abstraction: Determining essential features 
-  * Encapsulation: Containing and protecting related methods and properties 
+  * Encapsulation: Containing and protecting methods and properties 
   * Modularity: Breaking down a program into smaller sub-programs
 
 OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front-end to do things like...
