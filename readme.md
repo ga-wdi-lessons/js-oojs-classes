@@ -103,7 +103,7 @@ As you may have noticed, some of these properties change between cars (`model` a
 
 Why don't we build a function that makes these objects for us!
 
-### You Do Exercise: Create a `makeCar` Function (10 minutes / 0:25)
+### You Do: Create a `makeCar` Function (10 minutes / 0:25)
 
 > 5 minutes exercise. 5 minutes review.
 
