@@ -132,7 +132,7 @@ var celica = makeCar("Toy-Yoda Celica", "limegreen");
 
   ```js
   // ES6
-  function makeCar(model, color){
+  let makeCar = (model, color) => {
     return {
       model: model,
       color: color
