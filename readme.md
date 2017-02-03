@@ -7,7 +7,7 @@
 - Use the `new` keyword to create objects with shared properties
 - Create a class that inherits from another using the `extends` and `super` keywords
 
-## Framing (10 minutes / 0:10)
+## Framing
 
 We've already gotten exposure to Javascript objects using object literal notation (i.e., the curly brackets). Some of you might have had something like this in your first project...
 
@@ -56,8 +56,8 @@ An object encapsulates related data and behavior in an organized structure.
 Object-oriented programming (OOP) provides us with opportunities to clean up our procedural code and model it more-closely to the external world.
 
 OOP helps us to achieve the following...
-  * **Abstraction:** Determining essential features 
-  * **Encapsulation:** Containing and protecting methods and properties 
+  * **Abstraction:** Determining essential features
+  * **Encapsulation:** Containing and protecting methods and properties
   * **Modularity:** Breaking down a program into smaller sub-programs
 
 OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front-end to do things like...
@@ -65,7 +65,7 @@ OOP becomes **very** important as our front-end code grows in complexity. Even a
 * Update the state of the page as data changes
 * Respond to events like clicking buttons
 
-### Creating Objects (5 minutes / 0:15)
+### Creating Objects
 
 So far, we've had to make our objects 'by hand' (i.e. using object literals)...
 
@@ -103,11 +103,11 @@ As you may have noticed, some of these properties change between cars (`model` a
 
 Why don't we build a function that makes these objects for us!
 
-### You Do: Create a `makeCar` Function (10 minutes / 0:25)
+### We Do: Create a `makeCar` Function
 
 > 5 minutes exercise. 5 minutes review.
 
-Define a function `makeCar` that takes two parameters - `model` and `color` - and returns an object literal representing a car using those params.
+Let's define a function `makeCar` that takes two parameters - `model` and `color` - and returns an object literal representing a car using those params.
 
 ```js
 // This should return a car object just like the previous example
@@ -143,7 +143,7 @@ This is the basic idea behind OOP: we define a blueprint for an object and use i
 
 ## Classes
 
-### Overview (10 minutes / 0:35)
+### Overview
 
 If you want to follow along...
 
@@ -201,25 +201,7 @@ Classes are a lot like the `makeCar` function we just created, but they're suppo
 > Note that classes start with a capital letter to make it obvious
 that they are classes. This isn't necessary, but is a convention you should follow.
 
-### I Do: Make a Person Class (10 minutes / 0:45)
 
-```js
-class Person {
-  // We use the constructor method to initialize properties for a class instance.
-  // It takes whatever arguments we want to pass into an instance.
-  constructor(initialName){
-    this.name = initialName;
-    this.species = "Homo Sapiens";
-  }
-  // We define any methods accessible to an instance outside of the constructor
-  speak(){
-    return `Hello! I'm ${this.name}`;
-  }
-}
-
-const adrian = new Person("Adrian");
-adrian.speak(); // "Hello, I'm Adrian"
-```
 
 #### `this`
 
@@ -233,12 +215,6 @@ When we generate a class instance using `new`, Javascript will automatically...
 #### Where are the Commas?
 
 Unlike object notation, you do not need to use commas when separating class methods.
-
-### You Do: [Make an ATM Class](https://github.com/ga-wdi-exercises/es6-classes-practice) (20 minutes / 1:05)
-
-> 15 minutes exercise. 5 minutes review.
-
-## Break (10 minutes / 1:15)
 
 ## Inheritance (15 minutes / 1:30)
 
