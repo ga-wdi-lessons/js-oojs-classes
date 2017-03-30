@@ -9,28 +9,30 @@
 
 ## Framing (10 minutes / 0:10)
 
-We've already gotten exposure to Javascript objects using object literal notation (i.e., the curly brackets). Some of you might have had something like this in your first project...
+We've already gotten exposure to Javascript objects using object literal notation (i.e., the curly brackets). You might have created an ATM object like this:
 
 ```js
-const game = {
-  cards: $(".cards"),
-  startingTime: 0,
-  createBoard: function(){
-    let gameBoard = $("#game-board")
-    gameBoard.css("display", "inline")
+let savingsAccount = {
+  balance: $(".balance"),
+  withdrawButton: $(".withdraw"),
+  amount: 0,
+  withdraw: function(deduction){
+    this.amount -= deduction;
+    balance.text(this.amount);
   }
 };
 ```
 
-What's nice about the above code snippet? Try answering that question by comparing it to this...
+What's nice about the above code snippet? How does it compare to this...
 
 ```js
-let cards = $(".cards")
-let startingTime = 0;
-function createBoard(){
-  let gameBoard = $("#game-board")
-  gameBoard.css("display", "inline")
-}
+  let balance = $(".balance");
+  let withdrawButton = $(".withdraw");
+  let amount = 0;
+  let withdraw = function(deduction){
+    amount -= deduction;
+    balance.text(amount);
+  }
 ```
 
 <details>
@@ -56,8 +58,8 @@ An object encapsulates related data and behavior in an organized structure.
 Object-oriented programming (OOP) provides us with opportunities to clean up our procedural code and model it more-closely to the external world.
 
 OOP helps us to achieve the following...
-  * **Abstraction:** Determining essential features 
-  * **Encapsulation:** Containing and protecting methods and properties 
+  * **Abstraction:** Determining essential features
+  * **Encapsulation:** Containing and protecting methods and properties
   * **Modularity:** Breaking down a program into smaller sub-programs
 
 OOP becomes **very** important as our front-end code grows in complexity. Even a simple app will have lots of code on the front-end to do things like...
@@ -101,7 +103,7 @@ Even though we're technically using objects to organize our code, we can see a n
 
 As you may have noticed, some of these properties change between cars (`model` and `color`), and others stay the same. For example, `fuel` starts at 100, while the `drive` and `refuel` functions are the same for every car.
 
-Why don't we build a function that makes these objects for us!
+Making all of these similar objects by hand is just tedious. What if we could build a function that makes them for us?
 
 ### You Do: Create a `makeCar` Function (10 minutes / 0:25)
 
@@ -139,42 +141,19 @@ var celica = makeCar("Toy-Yoda Celica", "limegreen");
 
 </details>
 
-This is the basic idea behind OOP: we define a blueprint for an object and use it to generate multiple instances of it!
+This is the basic idea behind OOP: we define a **blueprint** for an object and use it to generate multiple instances of it!
 
 ## Classes
 
 ### Overview (10 minutes / 0:35)
 
-If you want to follow along...
-
-```bash
-$ touch index.html script.js
-$ atom .
-$ open index.html
-```
-
-<details>
-
-  <summary><strong>Here's some starter HTML if you need it...</strong></summary>
-
-  ```html
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Classes Practice</title>
-  </head>
-  <body>
-
-  </body>
-  <script src="script.js"></script>
-  </html>
-  ```
-</details>
+To follow along, open up a new JS tab for [repl.it](https://repl.it/languages/javascript). Use that workspace to test out our code.
 
 It's so common that we need to make objects with similar properties and methods that programming languages usually have some features to help with this.
 
-In Javascript, we use an ES6 feature called **classes** to accomplish this. Here's a class that serves the same purpose as our car blueprint. We'll dive into the details in just a bit...
+In Javascript, ES6 provides a feature called **classes** to accomplish this. A class serves as a **blueprint** for instantiating new objects.
+
+Let's take a look the following `Car` class:
 
 ```js
 class Car {
@@ -196,7 +175,7 @@ const celica = new Car("Toy-Yoda Celica", "limegreen");
 const civic = new Car("Honda Civic", "lemonchiffon");
 ```
 
-Classes are a lot like the `makeCar` function we just created, but they're supported by JS and we use the `new` keyword to generate instances of an object (just like our earlier `celica` and `civic` examples).
+Classes work a lot like the `makeCar` function we just created, but they're supported by JS and we use the `new` keyword to generate instances of an object (just like our earlier `celica` and `civic` examples).
 
 > Note that classes start with a capital letter to make it obvious
 that they are classes. This isn't necessary, but is a convention you should follow.
@@ -217,8 +196,8 @@ class Person {
   }
 }
 
-const adrian = new Person("Adrian");
-adrian.speak(); // "Hello, I'm Adrian"
+const andy = new Person("Andy");
+andy.speak(); // "Hello, I'm Andy"
 ```
 
 #### `this`
@@ -282,7 +261,7 @@ Here we have two classes: `Dog` and `Cat`. They have some things in common: `nam
 
 Imagine that we had to create a number of other classes - `Horse`, `Goat`, `Pig`, etc. - all of which share the same aforementioned properties but also have methods that are particular to the class.
 
-How could we refactor this so that we don't have to keep writing out the shared class properties and methods. Enter **inheritance**...
+How could we refactor this so that we don't have to keep writing out the shared class properties and methods. Enter **inheritance** (think genetics, not money from your rich uncle)
 
 ```js
 class Animal{
@@ -349,7 +328,7 @@ console.log(fido); // "this is not defined"
 
 That didn't work out the way we expected. That's because we're forgetting one thing. When creating an instance of a child class, we need to make sure it invokes the constructor of the parent (`Animal`) class.
 
-We can do that using the keyword `super()`...
+We can do that using the keyword `super()`
 
 ```js
 class Dog extends Animal {
@@ -366,6 +345,8 @@ class Dog extends Animal {
 `super()` calls the constructor of the parent class. In the above example, once `super` does what it needs to do, it then runs through the rest of `Dog`s constructor.
 
 > In order to give an instance of a child class context (i.e., be able to use `this`), you must call `super`.
+
+> If the keyword `super` is confusing, think of a supervisor to understand that we're calling out to the next level above us (to the parent class's constructor).
 
 ## You Do: [Inheritance](https://github.com/ga-wdi-exercises/es6-classes-inheritance-practice) (20 minutes / 1:50)
 
