@@ -147,8 +147,6 @@ This is the basic idea behind OOP: we define a **blueprint** for an object and u
 
 ### Overview (10 minutes / 0:35)
 
-To follow along, open up a new JS tab for [repl.it](https://repl.it/languages/javascript). Use that workspace to test out our code.
-
 It's so common that we need to make objects with similar properties and methods that programming languages usually have some features to help with this.
 
 In Javascript, ES6 provides a feature called **classes** to accomplish this. A class serves as a **blueprint** for instantiating new objects.
