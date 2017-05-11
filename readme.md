@@ -133,8 +133,8 @@ var celica = makeCar("Toy-Yoda Celica", "limegreen");
   // ES6
   let makeCar = (model, color) => {
     return {
-      model: model,
-      color: color
+      model, //ES6 shorthand for model: model
+      color  //ES6 shorthand for color: color
     }
   }
   ```
@@ -292,7 +292,7 @@ class Animal {
   }
   eat(food){
     this.diet.push(food);
-    console.log(diet);
+    console.log(this.diet);
   }
 }
 
